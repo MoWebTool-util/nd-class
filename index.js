@@ -2,6 +2,8 @@
 
 // Class
 // -----------------
+// fork from:
+//  - https://github.com/aralejs/class/blob/master/class.js
 // Thanks to:
 //  - http://mootools.net/docs/core/Class/Class
 //  - http://ejohn.org/blog/simple-javascript-inheritance/
