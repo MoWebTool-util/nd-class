@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   'use strict';
 
@@ -11,11 +11,16 @@ module.exports = function(grunt) {
 
     pkg: pkg,
 
-    wrap: {
-      server: {
-        // use defaults
+    server: {
+      // use defaults
+      develop: {
+        options: {
+          config: false,
+          release: false
+        }
       }
-    },
+    }
+    ,
 
     jshint: {
       files: ['index.js', 'src/**/*.js'],
@@ -31,11 +36,9 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('test', ['jshint','exec:spm-test']);
+  grunt.registerTask('test', ['jshint', 'exec:spm-test']);
 
   grunt.registerTask('publish', ['test', 'exec:spm-publish']);
-
-  grunt.registerTask('server', ['wrap']);
 
   grunt.registerTask('default', ['server']);
 
