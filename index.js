@@ -2,6 +2,8 @@
 
 // Class
 // -----------------
+// 2.x:
+//  - only for mobile
 // fork from:
 //  - https://github.com/aralejs/class/blob/master/class.js
 // Thanks to:
@@ -17,34 +19,15 @@ var Class;
 // Helpers
 // ------------
 
-var toString = Object.prototype.toString;
-
-var isArray = Array.isArray || function(val) {
-  return toString.call(val) === '[object Array]';
-};
-
 var isFunction = function(val) {
-  return toString.call(val) === '[object Function]';
+  return Object.prototype.toString.call(val) === '[object Function]';
 };
-
-var indexOf = Array.prototype.indexOf ?
-  function(arr, item) {
-    return arr.indexOf(item);
-  } :
-  function(arr, item) {
-    for (var i = 0, len = arr.length; i < len; i++) {
-      if (arr[i] === item) {
-        return i;
-      }
-    }
-    return -1;
-  };
 
 function mix(r, s, wl) {
   // Copy "all" properties including inherited ones.
   for (var p in s) {
     if (s.hasOwnProperty(p)) {
-      if (wl && indexOf(wl, p) === -1) {
+      if (wl && wl.indexOf(p) === -1) {
         continue;
       }
 
@@ -183,7 +166,7 @@ Class.Mutators = {
   },
 
   'Implements': function(items) {
-    isArray(items) || (items = [items]);
+    Array.isArray(items) || (items = [items]);
     var proto = this.prototype,
       item;
 
