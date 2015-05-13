@@ -56,7 +56,6 @@ function mix(r, s, wl) {
   }
 }
 
-
 // Class
 // ------------
 
@@ -151,7 +150,6 @@ Class.create = function(parent, properties) {
   return classify(SubClass);
 };
 
-
 // Create a sub Class based on `Class`.
 Class.extend = function(properties) {
   properties || (properties = {});
@@ -159,7 +157,6 @@ Class.extend = function(properties) {
 
   return Class.create(properties);
 };
-
 
 // Mutators define special properties.
 Class.Mutators = {
