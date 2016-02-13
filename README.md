@@ -2,7 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/ndfront/nd-class.svg?style=flat-square)](https://github.com/ndfront/nd-class)
 [![Coveralls](https://img.shields.io/coveralls/ndfront/nd-class.svg?style=flat-square)](https://github.com/ndfront/nd-class)
-[![NPM version](https://img.shields.io/npm/v/nd-promise.svg?style=flat-square)](https://npmjs.org/package/nd-class)
+[![NPM version](https://img.shields.io/npm/v/nd-class.svg?style=flat-square)](https://npmjs.org/package/nd-class)
 
 > 提供简洁的 OO 实现。fork 自 [arale-class](https://github.com/aralejs/class)
 
