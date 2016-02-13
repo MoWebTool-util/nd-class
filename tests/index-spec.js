@@ -1,4 +1,4 @@
-var expect = require('expect.js');
+var assert = require('better-assert');
 var Class = require('../index');
 
 describe('class', function() {
@@ -15,20 +15,20 @@ describe('class', function() {
     var Dog = Class.create(Animal);
     var dog = new Dog('Jack');
 
-    expect(dog.constructor).to.equal(Dog);
-    expect(dog.name).to.equal('Jack');
-    expect(dog.getName()).to.equal('Jack');
+    assert(dog.constructor === Dog);
+    assert(dog.name === 'Jack');
+    assert(dog.getName() === 'Jack');
   });
 
   it('Class.create(null)', function() {
     var Dog = Class.create(null);
     var dog = new Dog();
-    expect(dog.constructor).to.equal(Dog);
-    expect(Dog.superclass.constructor).to.equal(Class);
+    assert(dog.constructor === Dog);
+    assert(Dog.superclass.constructor === Class);
 
     Dog = Class.create();
     new Dog();
-    expect(Dog.superclass.constructor).to.equal(Class);
+    assert(Dog.superclass.constructor === Class);
   });
 
   it('Class.create(parent, properties)', function() {
@@ -47,8 +47,8 @@ describe('class', function() {
     });
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(dog.talk()).to.equal('I am Jack');
+    assert(dog.name === 'Jack');
+    assert(dog.talk() === 'I am Jack');
   });
 
   it('call initialize method properly', function() {
@@ -69,7 +69,7 @@ describe('class', function() {
     new Dog();
 
     // Dog 有 initialize 时，只调用 Dog 的 initialize
-    expect(counter).to.equal(1);
+    assert(counter === 1);
 
     counter = 0;
     Dog = Class.create(Animal);
@@ -77,7 +77,7 @@ describe('class', function() {
     new Dog();
 
     // Dog 没有 initialize 时，会自动调用父类中最近的 initialize
-    expect(counter).to.equal(1);
+    assert(counter === 1);
   });
 
   it('pass arguments to initialize method properly', function() {
@@ -95,7 +95,7 @@ describe('class', function() {
 
     var bird = new Bird('Frank', 'Wang');
 
-    expect(bird.fullName).to.equal('Frank Wang');
+    assert(bird.fullName === 'Frank Wang');
   })
 
   it('superclass', function() {
@@ -121,8 +121,8 @@ describe('class', function() {
 
     var dog = new Dog();
 
-    expect(counter).to.equal(1);
-    expect(dog.talk()).to.equal('I am an animal');
+    assert(counter === 1);
+    assert(dog.talk() === 'I am an animal');
   });
 
   it('Extends', function() {
@@ -143,9 +143,9 @@ describe('class', function() {
 
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(dog.getName()).to.equal('Jack');
-    expect(dog.talk()).to.equal('I am Jack');
+    assert(dog.name === 'Jack');
+    assert(dog.getName() === 'Jack');
+    assert(dog.talk() === 'I am Jack');
   });
 
   it('Implements', function() {
@@ -177,10 +177,10 @@ describe('class', function() {
 
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(dog.getName()).to.equal('Jack');
-    expect(dog.fly()).to.equal('I am flying');
-    expect(dog.talk()).to.equal('I am Jack');
+    assert(dog.name === 'Jack');
+    assert(dog.getName() === 'Jack');
+    assert(dog.fly() === 'I am flying');
+    assert(dog.talk() === 'I am Jack');
   });
 
   it('Statics', function() {
@@ -195,8 +195,8 @@ describe('class', function() {
 
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(Dog.COLOR).to.equal('red');
+    assert(dog.name === 'Jack');
+    assert(Dog.COLOR === 'red');
   });
 
   it('statics inherited from parent', function() {
@@ -215,15 +215,15 @@ describe('class', function() {
       }
     });
 
-    expect(Dog.LEGS).to.equal(4);
-    expect(Dog.COLOR).to.equal('red');
+    assert(Dog.LEGS === 4);
+    assert(Dog.COLOR === 'red');
 
     var Pig = Class.create(Class);
 
-    expect(typeof Pig.implement).to.equal('function');
-    expect(typeof Pig.extend).to.equal('function');
-    expect(typeof Pig.Mutators).to.equal('undefined');
-    expect(typeof Pig.create).to.equal('undefined');
+    assert(typeof Pig.implement === 'function');
+    assert(typeof Pig.extend === 'function');
+    assert(typeof Pig.Mutators === 'undefined');
+    assert(typeof Pig.create === 'undefined');
   });
 
   it('Class.extend', function() {
@@ -235,8 +235,8 @@ describe('class', function() {
 
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(Dog.superclass.constructor).to.equal(Class);
+    assert(dog.name === 'Jack');
+    assert(Dog.superclass.constructor === Class);
   });
 
   it('SubClass.extend', function() {
@@ -247,8 +247,8 @@ describe('class', function() {
     var Dog = Animal.extend();
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(Dog.superclass.constructor).to.equal(Animal);
+    assert(dog.name === 'Jack');
+    assert(Dog.superclass.constructor === Animal);
   });
 
   it('SubClass.implement', function() {
@@ -265,9 +265,9 @@ describe('class', function() {
 
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(dog.talk()).to.equal('I am Jack');
-    expect(Dog.superclass.constructor).to.equal(Animal);
+    assert(dog.name === 'Jack');
+    assert(dog.talk() === 'I am Jack');
+    assert(Dog.superclass.constructor === Animal);
   });
 
   it('convert existed function to Class', function() {
@@ -283,8 +283,8 @@ describe('class', function() {
 
     var dog = new Dog('Jack');
 
-    expect(dog.name).to.equal('Jack');
-    expect(dog.getName()).to.equal('Jack');
+    assert(dog.name === 'Jack');
+    assert(dog.getName() === 'Jack');
 
     var MyDog = Dog.extend({
       talk: function() {
@@ -293,7 +293,7 @@ describe('class', function() {
     });
 
     var myDog = new MyDog('Frank');
-    expect(myDog.name).to.equal('Frank');
+    assert(myDog.name === 'Frank');
   });
 
   it('new AnotherClass() in initialize', function() {
@@ -319,7 +319,7 @@ describe('class', function() {
     });
 
     new Dog();
-    expect(called.join(' ')).to.equal('Pig Dog');
+    assert(called.join(' ') === 'Pig Dog');
 
   });
 
@@ -331,9 +331,9 @@ describe('class', function() {
     A.StaticsWhiteList = ['a'];
     var B = A.extend(A);
 
-    expect(B.a).to.equal(1);
-    expect(B.b).to.equal(undefined);
-    expect(B.StaticsWhiteList).to.equal(undefined);
+    assert(B.a === 1);
+    assert(B.b === undefined);
+    assert(B.StaticsWhiteList === undefined);
 
   });
 
@@ -343,8 +343,8 @@ describe('class', function() {
     var dog = new Dog();
     //seajs.log(dog, 'dir')
 
-    expect(dog.isAnimal).to.equal(true);
-    expect(dog.isDog).to.equal(true);
+    assert(dog.isAnimal === true);
+    assert(dog.isDog === true);
   });
 
 });
